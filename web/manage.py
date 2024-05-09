@@ -19,6 +19,7 @@ def main():
 
 
 if __name__ == '__main__':
+    # TODO: убрать потом
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     load_dotenv(os.path.join(BASE_DIR, '.env.dev'))
     main()
