@@ -1,3 +1,6 @@
+# noinspection PyUnresolvedReferences
+from .base import *
+
 SECRET_KEY = 'my-secret-key'
 
 DEBUG = True

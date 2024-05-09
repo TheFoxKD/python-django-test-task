@@ -1,8 +1,8 @@
 import os.path
 
-from jinja2 import Environment, FileSystemLoader, MemcachedBytecodeCache
+from jinja2 import Environment, FileSystemLoader
 
-from project.config.settings.base import BASE_DIR
+from .settings.base import BASE_DIR
 
 
 def environment(**options):
@@ -10,5 +10,5 @@ def environment(**options):
     env.autoescape = True
     env.newline_sequence = '\n'
     env.loader = FileSystemLoader(os.path.join(BASE_DIR, 'jinja2_templates'))
-    env.bytecode_cache = MemcachedBytecodeCache()
+    # env.bytecode_cache = MemcachedBytecodeCache()
     return env
