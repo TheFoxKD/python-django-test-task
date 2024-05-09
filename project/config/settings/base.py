@@ -52,9 +52,19 @@ ROOT_URLCONF = 'config.urls'
 
 TEMPLATES = [
     {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [
+            BASE_DIR / 'jinja2_templates',
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'config.jinja2.environment',
+        },
+    },
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR / 'templates',
+            BASE_DIR / 'django_templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -66,6 +76,7 @@ TEMPLATES = [
             ],
         },
     },
+
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
@@ -109,7 +120,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR.parent / 'static',
 ]
 
 # Default primary key field type
