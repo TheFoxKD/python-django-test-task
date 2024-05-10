@@ -1,3 +1,5 @@
+from django.contrib.postgres.indexes import GinIndex
+from django.contrib.postgres.search import SearchVectorField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -11,12 +13,16 @@ class Shop(models.Model):
         title (str): The stores name.
         description (str): Description of the store.
         imageUrl (str): URL of the stores image.
+        search_vector (SearchVectorField): The search vector for the store.
     """
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     description = models.TextField(verbose_name=_('Description'))
     imageUrl = models.URLField(verbose_name=_('Image URL'))
+    # Search vector for full-text search in the title and description fields.
+    search_vector = SearchVectorField(null=True)
 
     class Meta:
+        indexes = [GinIndex(fields=['search_vector'])]
         verbose_name = _('Shop')
         verbose_name_plural = _('Shops')
 
