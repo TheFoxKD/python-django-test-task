@@ -7,13 +7,13 @@
         <input type="text" name="search" placeholder="Search by title" value="{{ request.GET.search }}" id="search">
         <button type="submit">Search</button>
     </form>
+    
     <ul>
-        {% for shop in shops %}
+        {% for shop in shop_list %}
             <li>
                 <h2>{{ shop.title }}</h2>
                 <p>{{ shop.description }}</p>
                 <img src="{{ shop.imageUrl }}" alt="{{ shop.title }}">
-
             </li>
         {% endfor %}
     </ul>
