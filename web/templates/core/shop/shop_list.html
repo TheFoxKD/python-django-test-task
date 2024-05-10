@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "core/extend_base.html" %}
 
 {% block content %}
     <h1>Shops</h1>
@@ -7,7 +7,7 @@
         <input type="text" name="search" placeholder="Search by title" value="{{ request.GET.search }}" id="search">
         <button type="submit">Search</button>
     </form>
-    
+
     <ul>
         {% for shop in shop_list %}
             <li>
