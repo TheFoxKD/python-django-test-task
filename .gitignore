@@ -352,3 +352,5 @@ FodyWeavers.xsd
 *.msp
 *.sln.iml
 coverage*[.json, .xml, .info]
+/web/apps/core/static/core/bootstrap/css/bootstrap.css
+/web/apps/core/static/core/bootstrap/js/bootstrap.js
