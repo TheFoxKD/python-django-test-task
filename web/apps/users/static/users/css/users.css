@@ -1,0 +1,23 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centering content vertically */
+}
+
+main {
+    flex: 1; /* Takes up all available space, leaving the footer at the bottom */
+    display: flex;
+    justify-content: center; /* Centering content horizontally */
+    align-items: center; /* Centering content vertically */
+}
+
+footer {
+    margin-top: auto;
+}
+
+#confirm-password {
+    margin-bottom: 20px; /* Adding an indent at the bottom for input confirm password */
+}
+
+

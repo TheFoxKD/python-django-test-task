@@ -4,22 +4,22 @@
 
 {% block css %}
     <link rel="stylesheet" href="{% static 'core/css/bootstrap/bootstrap.css' %}"/>
-    <link rel="stylesheet" href="{% static 'core/css/core.css' %}"/>
+    <link rel="stylesheet" href="{% static 'users/css/users.css' %}"/>
 {% endblock css %}
 
 {% block  body %}
-    <header>
-        {% include 'core/includes/navbar.html' %}
-    </header>
+
     <main>
-        <div class="container">
-            {% block content %}
-            {% endblock content %}
-        </div>
+        {% block content %}
+        {% endblock content %}
     </main>
+
+
     <footer>
         {% include 'core/includes/footer.html' %}
     </footer>
+
+
 {% endblock body %}
 
 {% block js %}
