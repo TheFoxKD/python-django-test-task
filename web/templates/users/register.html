@@ -12,19 +12,22 @@
                         <form id="register-form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="username">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" required>
-                                <div class="invalid-feedback" id="username-feedback"></div>
+                                <label for="{{ form.username.id_for_label }}">Username</label>
+                                <input type="text" class="form-control" id="{{ form.username.id_for_label }}"
+                                       name="{{ form.username.html_name }}" required autocomplete="username">
+                                <div class="invalid-feedback" id="{{ form.username.id_for_label }}-feedback"></div>
                             </div>
                             <div class="form-group">
-                                <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
+                                <label for="{{ form.password1.id_for_label }}">Password</label>
+                                <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"
+                                       name="{{ form.password1.html_name }}" required autocomplete="new-password">
                             </div>
                             <div class="form-group">
-                                <label for="confirm-password">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirm-password"
-                                       name="confirm-password" required>
-                                <div class="invalid-feedback" id="password-feedback"></div>
+                                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
+                                <input type="password" class="form-control password-input"
+                                       id="{{ form.password2.id_for_label }}"
+                                       name="{{ form.password2.html_name }}" required autocomplete="new-password">
+                                <div class="invalid-feedback" id="{{ form.password2.id_for_label }}-feedback"></div>
                             </div>
                             <button type="submit" class="btn btn-success w-100">Register</button>
                         </form>
