@@ -2,8 +2,8 @@ from dataclasses import dataclass
 
 from django.db.models import QuerySet
 
-from web.apps.core.interfaces.shop_interfaces import IShopRepository
-from web.apps.core.models import Shop
+from ..interfaces.shop_interfaces import IShopRepository
+from ..models import Shop
 
 
 @dataclass
@@ -17,7 +17,7 @@ class ShopService:
 
     def search_shops_by_title(self, title: str) -> QuerySet[Shop | None]:
         """Search shops by title."""
-        return self.shop_repository.filter_by_title(title)
+        return self.shop_repository.search_by_title(title)
 
     def create_shop(self, data: dict) -> Shop:
         """Create a new shop."""

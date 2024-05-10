@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 from django.db.models import QuerySet
 
-from web.apps.core.models import Shop
+from ..models import Shop
 
 
 class IShopRepository(ABC):
@@ -16,7 +16,7 @@ class IShopRepository(ABC):
         pass
 
     @abstractmethod
-    def filter_by_title(self, title: str) -> QuerySet[Shop | None]:
+    def search_by_title(self, title: str) -> QuerySet[Shop | None]:
         pass
 
     @abstractmethod
