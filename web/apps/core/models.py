@@ -14,7 +14,7 @@ class Shop(models.Model):
     """
     title = models.CharField(max_length=255, verbose_name=_('Title'))
     description = models.TextField(verbose_name=_('Description'))
-    imageUrl = models.URLField()
+    imageUrl = models.URLField(verbose_name=_('Image URL'))
 
     class Meta:
         verbose_name = _('Shop')
