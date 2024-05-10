@@ -356,3 +356,4 @@ coverage*[.json, .xml, .info]
 /web/apps/core/static/core/bootstrap/js/bootstrap.js
 /web/apps/core/static/core/js/bootstrap/bootstrap.js
 /web/apps/core/static/core/css/bootstrap/bootstrap.css
+/read.md
