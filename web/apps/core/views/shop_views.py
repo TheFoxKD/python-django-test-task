@@ -10,7 +10,7 @@ shop_service = ShopService(ShopRepository())
 
 class ShopListView(ListView):
     model = Shop
-    template_name = 'shop/shop_list.html'
+    template_name = 'core/shop/shop_list.html'
 
     def get_queryset(self):
         return shop_service.get_all_shops()
