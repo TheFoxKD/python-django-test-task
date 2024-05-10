@@ -1,0 +1,12 @@
+.navbar-brand img {
+    height: 50px; /* Increase or decrease the height of the logo */
+}
+
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.navbar-nav {
+    margin: 0;
+}
