@@ -1,6 +1,7 @@
 from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView
 
+from ..forms.shop_forms import CreateShopForm
 from ..models import Shop
 from ..repositories.shop_repositories import ShopRepository
 from ..services.shop_services import ShopService
@@ -33,4 +34,5 @@ class ShopUpdateView(UpdateView):
 
 
 class ShopCreateView(CreateView):
-    pass
+    form_class = CreateShopForm
+    template_name = 'core/shop/shop_create.html'
