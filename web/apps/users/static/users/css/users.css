@@ -16,7 +16,7 @@ footer {
     margin-top: auto;
 }
 
-#confirm-password {
+.password-input {
     margin-bottom: 20px; /* Adding an indent at the bottom for input confirm password */
 }
 
