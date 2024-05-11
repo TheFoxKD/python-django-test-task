@@ -6,6 +6,7 @@
 {% block title %}User{% endblock title %}
 
 {% block css %}
+    <link rel="stylesheet" href="{% static 'core/css/bootstrap/bootstrap-icons.css' %}"/>
     <link rel="stylesheet" href="{% static 'core/css/bootstrap/bootstrap.css' %}"/>
     <link rel="stylesheet" href="{% static 'users/css/users.css' %}"/>
 {% endblock css %}
@@ -25,4 +26,5 @@
 
 {% block js %}
     <script src="{% static 'core/js/bootstrap/bootstrap.js' %}"></script>
+    {% block extra_js %}{% endblock extra_js %}
 {% endblock js %}
