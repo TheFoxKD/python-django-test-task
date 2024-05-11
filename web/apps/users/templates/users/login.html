@@ -24,6 +24,7 @@
                                        name="{{ form.password.html_name }}" required autocomplete="current-password">
                             </div>
                             <button type="submit" class="btn btn-success w-100">Login</button>
+                            <a href="{% url 'users:signup' %}" class="btn btn-link">Don't have an account? Register</a>
                         </form>
                     </div>
                 </div>
