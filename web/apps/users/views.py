@@ -9,11 +9,13 @@ from .forms import CustomAuthenticationForm, CustomUserCreationForm
 
 User = get_user_model()
 
+SHOP_LIST_URL = reverse_lazy('core:shops:list')
+
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/register.html'
-    success_url = reverse_lazy('core:shop:list')
+    success_url = SHOP_LIST_URL
 
     @override
     def get_success_url(self) -> str:
@@ -29,7 +31,7 @@ class SignUpView(CreateView):
 class LoginView(FormView):
     form_class = CustomAuthenticationForm
     template_name = 'users/login.html'
-    success_url = reverse_lazy('core:shop:list')
+    success_url = SHOP_LIST_URL
 
     @override
     def get_success_url(self) -> str:
@@ -43,7 +45,7 @@ class LoginView(FormView):
 
 
 class LogoutView(RedirectView):
-    url = reverse_lazy('core:shop:list')
+    url = SHOP_LIST_URL
 
     @override
     def get_redirect_url(self, *args, **kwargs) -> str:
