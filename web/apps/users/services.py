@@ -28,3 +28,6 @@ class UserService:
             raise ValueError('Invalid password')
 
         return user
+
+    def check_email_availability(self, email: str) -> bool:
+        return not self.user_repository.email_exists(email=email)

@@ -30,3 +30,7 @@ class UserRepository(IUserRepository):
         return User.objects.filter(
             Q(username=username_or_email) | Q(email=username_or_email)
         ).first()
+
+    @override
+    def email_exists(self, email: str) -> bool:
+        return User.objects.filter(email=email).exists()
