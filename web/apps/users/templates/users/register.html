@@ -30,7 +30,7 @@
                                 <label for="{{ form.password1.id_for_label }}">Password</label>
                                 <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"
                                        name="{{ form.password1.html_name }}" required autocomplete="new-password">
-                                
+
                             </div>
                             <div class="form-group">
                                 <label for="{{ form.password2.id_for_label }}">Confirm
@@ -67,15 +67,33 @@
         checkFieldAvailability(emailInput, emailFeedback, '{% url "users:utils:check_email" %}');
 
 
+        /**
+         * Функция debounce для ограничения частоты вызова функции.
+         *
+         * @param {Function} func - Функция, вызов которой нужно ограничить.
+         * @param {number} wait - Задержка в миллисекундах между вызовами функции.
+         * @returns {Function} - Возвращает новую функцию, которую можно вызывать с ограниченной частотой.
+         */
         function debounce(func, wait) {
             let timeout;
             return function (...args) {
+                // Сохраняем контекст вызова функции
                 const context = this;
+                // Очищаем предыдущий таймаут
                 clearTimeout(timeout);
+                // Устанавливаем новый таймаут с вызовом функции
                 timeout = setTimeout(() => func.apply(context, args), wait);
             };
         }
 
+        /**
+         * Функция для проверки доступности поля (имя пользователя или email) на сервере.
+         *
+         * @param {HTMLElement} input - Элемент ввода, который нужно проверить.
+         * @param {HTMLElement} feedback - Элемент, в который выводится обратная связь для пользователя.
+         * @param {string} url - URL-адрес сервера для проверки доступности.
+         * @param {number} delay - Задержка в миллисекундах между вызовами функции (по умолчанию 500).
+         */
         function checkFieldAvailability(input, feedback, url, delay = 500) {
 
             const debouncedCheckAvailability = debounce(() => {
@@ -93,11 +111,9 @@
                         alert.classList.add(data.is_available ? 'text-success' : 'text-danger');
                         alert.textContent = `This ${input.name} is ${data.is_available ? 'available' : 'already taken'}`;
                         feedback.appendChild(alert);
-
                     })
                     .catch(console.error);
             }, delay);
-
 
             input.addEventListener('input', debouncedCheckAvailability);
         }
