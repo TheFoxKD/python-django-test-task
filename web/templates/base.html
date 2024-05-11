@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Default Title{% endblock title %}</title>
-    <!-- Add your CSS files here -->
+    <title>{% block title %}Website{% endblock title %}</title>
+    {% comment %}
+        Add your CSS files here
+    {% endcomment %}
     {% block css %}{% endblock css %}
 </head>
 <body>
-<!-- Add your body content here -->
+{% comment %}
+    Add your HTML content here
+{% endcomment %}
 {% block body %}{% endblock body %}
 
-<!-- Add your JavaScript files here -->
+{% comment %}
+    Add your JavaScript files here
+{% endcomment %}
 {% block js %}{% endblock js %}
 </body>
 </html>
