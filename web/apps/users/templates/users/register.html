@@ -1,43 +1,48 @@
 {% extends "users/extend_base.html" %}
+{% load static %}
 
-{% block title %}Register{% endblock title %}   
+{% block title %}Register{% endblock title %}
 
 {% block content %}
     <div class="container">
-        <div class="row justify-content-center align-items-center">
+        <div class="row justify-content-center">
             <div class="col-md-6">
-                <div class="card mt-5">
-                    <div class="card-header">
-                        <h3 class="text-center">Register</h3>
+                <div class="card mt-5 shadow">
+                    <div class="card-header bg-success text-white">
+                        <h3 class="mb-0 text-center"><i class="bi bi-person-plus-fill me-2"></i>Register</h3>
                     </div>
                     <div class="card-body">
                         <form id="register-form" method="post">
                             {% csrf_token %}
                             <div class="form-group">
-                                <label for="{{ form.username.id_for_label }}">Username</label>
+                                <label for="{{ form.username.id_for_label }}"><i class="bi bi-person-fill me-2"></i>Username</label>
                                 <input type="text" class="form-control" id="{{ form.username.id_for_label }}"
                                        name="{{ form.username.html_name }}" required autocomplete="username">
-                                <div class="invalid-feedback" id="{{ form.username.id_for_label }}-feedback"></div>
+                                <div id={{ form.username.id_for_label }}-feedback></div>
                             </div>
                             <div class="form-group">
-                                <label for="{{ form.email.id_for_label }}">Email</label>
+                                <label for="{{ form.email.id_for_label }}"><i class="bi bi-envelope-fill me-2"></i>Email</label>
                                 <input type="email" class="form-control" id="{{ form.email.id_for_label }}"
                                        name="{{ form.email.html_name }}" required autocomplete="email">
-                                <div class="invalid-feedback" id="{{ form.email.id_for_label }}-feedback"></div>
+                                <div id={{ form.email.id_for_label }}-feedback></div>
                             </div>
                             <div class="form-group">
                                 <label for="{{ form.password1.id_for_label }}">Password</label>
                                 <input type="password" class="form-control" id="{{ form.password1.id_for_label }}"
                                        name="{{ form.password1.html_name }}" required autocomplete="new-password">
+                                
                             </div>
                             <div class="form-group">
-                                <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
-                                <input type="password" class="form-control password-input"
+                                <label for="{{ form.password2.id_for_label }}">Confirm
+                                    Password</label>
+                                <input type="password" class="form-control"
                                        id="{{ form.password2.id_for_label }}"
                                        name="{{ form.password2.html_name }}" required autocomplete="new-password">
-                                <div class="invalid-feedback" id="{{ form.password2.id_for_label }}-feedback"></div>
                             </div>
-                            <button type="submit" class="btn btn-success w-100">Register</button>
+                            <button id="register-button" type="submit"
+                                    class="btn btn-success w-100 mt-4 mb-3">
+                                Register
+                            </button>
                             <a href="{% url 'users:login' %}" class="btn btn-link">Already have an account? Login</a>
                         </form>
                     </div>
@@ -46,3 +51,57 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block extra_js %}
+    <script>
+
+        const usernameInput = document.getElementById('{{ form.username.id_for_label }}');
+        const usernameFeedback = document.getElementById('{{ form.username.id_for_label }}-feedback');
+
+        const emailInput = document.getElementById('{{ form.email.id_for_label }}');
+        const emailFeedback = document.getElementById('{{ form.email.id_for_label }}-feedback');
+
+        const registerButton = document.getElementById('register-button');
+
+        checkFieldAvailability(usernameInput, usernameFeedback, '{% url "users:utils:check_username" %}');
+        checkFieldAvailability(emailInput, emailFeedback, '{% url "users:utils:check_email" %}');
+
+
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                const context = this;
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(context, args), wait);
+            };
+        }
+
+        function checkFieldAvailability(input, feedback, url, delay = 500) {
+
+            const debouncedCheckAvailability = debounce(() => {
+                const value = input.value.trim();
+                if (value === '' || (input.type === 'email' && !value.includes('@'))) {
+                    feedback.innerHTML = '';
+                    return;
+                }
+
+                fetch(`${url}?value=${value}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        feedback.innerHTML = '';
+                        const alert = document.createElement('div');
+                        alert.classList.add(data.is_available ? 'text-success' : 'text-danger');
+                        alert.textContent = `This ${input.name} is ${data.is_available ? 'available' : 'already taken'}`;
+                        feedback.appendChild(alert);
+
+                    })
+                    .catch(console.error);
+            }, delay);
+
+
+            input.addEventListener('input', debouncedCheckAvailability);
+        }
+
+
+    </script>
+{% endblock extra_js %}
