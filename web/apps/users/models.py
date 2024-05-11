@@ -2,18 +2,23 @@ import uuid
 
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
-from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUser(AbstractUser, PermissionsMixin):
+    """
+    Attributes:
+        uuid: The UUID of the user. Primary key.
+        username: The username of the user. From AbstractUser.
+        date_joined: The date the user joined. From AbstractUser.
+        is_active: Whether the user is active. From AbstractUser.
+
+    """
     uuid = models.UUIDField(primary_key=True, unique=True, default=uuid.uuid4, editable=False, db_index=True)
-    email = models.EmailField(null=True, blank=True)
-    username = models.CharField(max_length=150, unique=True)
-    date_joined = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=True)
+    email = models.EmailField(verbose_name=_('email address'), unique=True)
 
     USERNAME_FIELD = 'uuid'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username', 'email']
 
     def __str__(self):
         return self.username
