@@ -1,0 +1,10 @@
+<div class="col-md-4 mb-4">
+    <div class="card h-100">
+        <img src="{{ shop.imageUrl }}" class="card-img-top" alt="{{ shop.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{ shop.title }}</h5>
+            <p class="card-text">{{ shop.description|truncatechars:100 }}</p>
+            <a href="{% url 'core:shop:detail' shop.pk %}" class="btn btn-primary">View Details</a>
+        </div>
+    </div>
+</div>

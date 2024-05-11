@@ -1,38 +1,54 @@
 {% extends "core/extend_base.html" %}
 
 {% block content %}
-    <h1 class="text-center mb-4">Shops</h1>
-    <div class="row justify-content-center">
+
+    {% comment %}
+    Here we have a page title and a button to add a new shop.
+    {% endcomment %}
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-8">
+            <h1 class="mb-0">Shops</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="#" class="btn btn-primary align-items-center">
+                <i class="bi bi-plus me-2"></i>Add Shop
+            </a>
+        </div>
+    </div>
+
+    {% comment %}
+    Here we have a search form to search shops by title or description.
+    {% endcomment %}
+    <div class="row justify-content-center mb-4">
         <div class="col-md-6">
-            <form method="GET" class="mb-4">
+            <form method="GET" class="d-flex">
                 {% csrf_token %}
-                <div class="input-group">
-                    <label for="search" class="input-group-text">Search:</label>
-                    <input type="text" id="search" name="search" placeholder="Search by title"
+                <div class="input-group me-2">
+                    <label class="input-group-text bg-light" for="search">
+                        <i class="bi bi-search"></i>
+                    </label>
+                    <input type="text" id="search" name="search" placeholder="Search by title or description..."
                            value="{{ request.GET.search }}" class="form-control">
-                    <button type="submit" class="btn btn-primary">Search</button>
                 </div>
+                <button type="submit" class="btn btn-primary">Search</button>
             </form>
         </div>
     </div>
 
+    {% comment %}
+    Here we have a list of shops. If there are no shops found, we display a message.
+    {% endcomment %}
     <div class="row">
         {% for shop in shop_list %}
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="{{ shop.imageUrl }}" class="card-img-top" alt="{{ shop.title }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ shop.title }}</h5>
-                        <p class="card-text">{{ shop.description|truncatechars:100 }}</p>
-                        <a href="{% url 'core:shop:detail' shop.pk %}" class="btn btn-primary">View Details</a>
-                    </div>
-                </div>
-            </div>
+            {% include 'core/shop/includes/shop_card.html' %}
         {% empty %}
-            <div class="col-12">
-                <p class="text-center">No shops found.</p>
+            <div class="col-md-12">
+                <div class="alert alert-info" role="alert">
+                    No shops found.
+                </div>
             </div>
         {% endfor %}
     </div>
+
 
 {% endblock content %}
