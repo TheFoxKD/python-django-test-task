@@ -357,3 +357,10 @@ coverage*[.json, .xml, .info]
 /web/apps/core/static/core/js/bootstrap/bootstrap.js
 /web/apps/core/static/core/css/bootstrap/bootstrap.css
 /read.md
+/web/apps/core/static/core/css/bootstrap/fonts/
+/web/apps/core/static/core/css/bootstrap/bootstrap.css
+/web/apps/core/static/core/css/bootstrap/bootstrap-icons.css
+/web/staticfiles/
+/web/staticfiles/admin/
+/web/staticfiles/core/
+/web/staticfiles/users/
