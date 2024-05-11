@@ -14,3 +14,7 @@ class IUserRepository(ABC):
     @abstractmethod
     def username_exists(self, username: str) -> bool:
         pass
+
+    @abstractmethod
+    def get_user_by_username_or_email(self, username_or_email: str) -> User | None:
+        pass
