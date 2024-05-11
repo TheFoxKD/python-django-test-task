@@ -1,3 +1,13 @@
+/* Core CSS */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* End Core CSS */
+
+/* Navbar */
 .navbar-brand img {
     height: 50px; /* Increase or decrease the height of the logo */
 }
@@ -10,3 +20,24 @@
 .navbar-nav {
     margin: 0;
 }
+
+/* End Navbar */
+
+/* Main */
+main {
+    flex: 1; /* Takes up all available space, leaving the footer at the bottom */
+    display: flex;
+}
+
+/* End Main */
+
+
+/* Footer */
+footer {
+    margin-top: auto;
+}
+
+/* End Footer */
+
+
+
