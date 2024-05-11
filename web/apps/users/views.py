@@ -1,10 +1,9 @@
 from typing import override
 
-from django.contrib.auth import get_user_model, login
-from django.contrib.auth.views import LogoutView as DjangoLogoutView
+from django.contrib.auth import get_user_model, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, FormView
+from django.views.generic import CreateView, FormView, RedirectView
 
 from .forms import CustomAuthenticationForm, CustomUserCreationForm
 
@@ -43,5 +42,10 @@ class LoginView(FormView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-class LogoutView(DjangoLogoutView):
-    next_page = reverse_lazy('core:shop:list')
+class LogoutView(RedirectView):
+    url = reverse_lazy('core:shop:list')
+
+    @override
+    def get_redirect_url(self, *args, **kwargs) -> str:
+        logout(request=self.request)
+        return super().get_redirect_url(*args, **kwargs)
