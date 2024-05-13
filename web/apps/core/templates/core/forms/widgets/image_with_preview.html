@@ -1,0 +1,23 @@
+{% load static %}
+
+<div class="mb-3">
+    <label for="{{ widget.attrs.id }}">{{ widget.name|capfirst }}</label>
+    <input type="{{ widget.type }}" name="{{ widget.name }}"
+           id="{{ widget.attrs.id }}" class="form-control">
+    <img id="{{ widget.attrs.id }}-preview" class="mt-2"
+         src="{% static 'core/img/image_placeholder.jpg' %}"
+         alt="Image preview" style="max-width: 100%;">
+</div>
+<script>
+    {% comment %}
+    This script listens for changes on the file input field and updates the image preview element with the selected image.
+    {% endcomment %}
+    document.querySelector('#{{ widget.attrs.id }}').addEventListener('change', function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            document.querySelector('#{{ widget.attrs.id }}-preview').src = e.target.result;
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    });
+
+</script>
