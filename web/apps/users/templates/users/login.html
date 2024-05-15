@@ -15,7 +15,6 @@
                             {% csrf_token %}
                             <div class="form-group">
                                 <label for="{{ form.username_or_email.id_for_label }}">Username/Email</label>
-
                                 <input type="text" class="form-control" id="{{ form.username_or_email.id_for_label }}"
                                        name="{{ form.username_or_email.html_name }}" required
                                        autocomplete="username|email">
