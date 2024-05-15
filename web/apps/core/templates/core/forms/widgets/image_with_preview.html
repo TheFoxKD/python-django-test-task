@@ -1,23 +1,31 @@
 {% load static %}
 
-<div class="mb-3">
-    <label for="{{ widget.attrs.id }}">{{ widget.name|capfirst }}</label>
-    <input type="{{ widget.type }}" name="{{ widget.name }}"
-           id="{{ widget.attrs.id }}" class="form-control">
-    <img id="{{ widget.attrs.id }}-preview" class="mt-2"
-         src="{% static 'core/img/image_placeholder.jpg' %}"
-         alt="Image preview" style="max-width: 100%;">
-</div>
+<input type="{{ widget.type }}" name="{{ widget.name }}"
+       id="{{ widget.attrs.id }}" class="form-control" style="display: none;"
+       {% if widget.attrs.required %}required{% endif %}
+       {% if widget.attrs.accept %}accept="{{ widget.attrs.accept }}"{% endif %}
+>
+<img id="{{ widget.attrs.id }}-preview"
+     src="{% static 'core/img/image_placeholder.jpg' %}"
+     alt="Image preview" onclick="document.getElementById('{{ widget.attrs.id }}').click();"
+     class="img-thumbnail img-fluid"
+     style="max-height: 200px;border: 1px solid #ccc;display: block;cursor: pointer;">
+
 <script>
     {% comment %}
     This script listens for changes on the file input field and updates the image preview element with the selected image.
     {% endcomment %}
-    document.querySelector('#{{ widget.attrs.id }}').addEventListener('change', function (e) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            document.querySelector('#{{ widget.attrs.id }}-preview').src = e.target.result;
-        };
-        reader.readAsDataURL(e.target.files[0]);
+    const fileInput = document.getElementById('{{ widget.attrs.id }}');
+    const preview = document.getElementById('{{ widget.attrs.id }}-preview');
+    fileInput.addEventListener('change', function () {
+        if (fileInput.files.length > 0) { // Check if any file is selected
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
     });
 
 </script>
