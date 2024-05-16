@@ -1,0 +1,6 @@
+<input type="text" name="{{ widget.name }}"
+       id="{{ widget.attrs.id }}"
+       class="form-control {{ widget.attrs.class }}"
+       {% if widget.attrs.required %}required{% endif %}
+       {% if widget.attrs.placeholder %}placeholder="{{ widget.attrs.placeholder }}"{% endif %}
+       value="{{ widget.value|default_if_none:'' }}">
