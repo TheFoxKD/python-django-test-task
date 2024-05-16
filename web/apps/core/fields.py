@@ -7,3 +7,11 @@ class ImageUrlPreviewWidget(forms.ClearableFileInput):
 
 class ImageUrlPreviewField(forms.ImageField):
     widget = ImageUrlPreviewWidget
+
+
+class TitleInputWidget(forms.TextInput):
+    template_name = 'core/forms/widgets/title_input.html'
+
+
+class DescriptionTextareaWidget(forms.Textarea):
+    template_name = 'core/forms/widgets/description_textarea.html'
