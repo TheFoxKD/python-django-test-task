@@ -1,12 +1,15 @@
 from django import forms
 
-from ..fields import ImageUrlPreviewField
+from ..fields import DescriptionTextareaWidget, ImageUrlPreviewWidget, TitleInputWidget
 from ..models import Shop
 
 
 class CreateShopForm(forms.ModelForm):
-    image = ImageUrlPreviewField(required=False)
-
     class Meta:
         model = Shop
-        fields = ['title', 'description', 'image']
+        fields = ['title', 'description', 'imageUrl']
+        widgets = {
+            'title': TitleInputWidget(),
+            'description': DescriptionTextareaWidget(),
+            'imageUrl': ImageUrlPreviewWidget()
+        }
