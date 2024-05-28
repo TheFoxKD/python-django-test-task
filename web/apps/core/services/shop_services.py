@@ -4,6 +4,7 @@ from django.db.models import QuerySet
 
 from ..interfaces.shop_interfaces import IShopRepository
 from ..models import Shop
+from ..types import URL
 
 
 @dataclass
@@ -19,9 +20,9 @@ class ShopService:
         """Search shops by title."""
         return self.shop_repository.search_by_title(title)
 
-    def create_shop(self, data: dict) -> Shop:
+    def create_shop(self, title: str, description: str, image_url: URL) -> Shop:
         """Create a new shop."""
-        return self.shop_repository.create_shop(data)
+        return self.shop_repository.create_shop(title, description, image_url)
 
     def update_shop(self, id: int, data: dict) -> None:
         """Update shop by id."""
