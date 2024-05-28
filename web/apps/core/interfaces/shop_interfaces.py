@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from django.db.models import QuerySet
 
 from ..models import Shop
+from ..types import URL
 
 
 class IShopRepository(ABC):
@@ -20,7 +21,7 @@ class IShopRepository(ABC):
         pass
 
     @abstractmethod
-    def create_shop(self, data: dict) -> Shop:
+    def create_shop(self, title: str, description: str, image_url: URL) -> Shop:
         pass
 
     @abstractmethod

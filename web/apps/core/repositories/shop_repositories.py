@@ -4,6 +4,7 @@ from django.db.models import QuerySet
 
 from ..interfaces.shop_interfaces import IShopRepository
 from ..models import Shop
+from ..types import URL
 
 
 class ShopRepository(IShopRepository):
@@ -23,9 +24,9 @@ class ShopRepository(IShopRepository):
         return Shop.objects.filter(search_vector=title)
 
     @override
-    def create_shop(self, data: dict) -> Shop:
+    def create_shop(self, title: str, description: str, image_url: URL) -> Shop:
         """Create a new shop."""
-        return Shop.objects.create(**data)
+        return Shop.objects.create(title=title, description=description, image_url=image_url)
 
     @override
     def update_shop(self, id: int, data: dict) -> None:
