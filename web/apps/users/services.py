@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from django.contrib.auth import get_user_model
 
+from .exceptions import InvalidPasswordException, UserNotFoundException
 from .interfaces import IUserRepository
 
 User = get_user_model()
@@ -22,10 +23,10 @@ class UserService:
         user = self.user_repository.get_user_by_username_or_email(username_or_email)
 
         if user is None:
-            raise ValueError('User not found')
+            raise UserNotFoundException('User not found')
 
         if not user.check_password(password):
-            raise ValueError('Invalid password')
+            raise InvalidPasswordException('Invalid password')
 
         return user
 
