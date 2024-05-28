@@ -1,6 +1,7 @@
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchVectorField
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
 
@@ -31,6 +32,9 @@ class Shop(models.Model):
 
     def __repr__(self):
         return f'<Shop id={self.pk}, title={self.title}>'
+
+    def get_absolute_url(self):
+        return reverse('core:shops:detail', kwargs={'pk': self.pk})
 
 
 class Product(models.Model):
