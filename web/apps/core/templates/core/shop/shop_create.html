@@ -3,7 +3,6 @@
 {% block content %}
     <div class="my-5 row justify-content-center">
         <div class="col-md-8">
-
             <div class="card">
                 <!-- Заголовок карточки -->
                 <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
@@ -14,7 +13,7 @@
                 </div>
                 <!-- Форма создания магазина -->
                 <div class="card-body">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" id="create-shop-form">
                         {% csrf_token %}
                         <div class="card mb-3">
                             <div class="card-body">
@@ -47,10 +46,9 @@
 
                     </form>
                 </div>
-
                 <!-- Кнопка создания магазина -->
                 <div class="card-footer d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary">
+                    <button type="submit" class="btn btn-primary" form="create-shop-form">
                         <i class="bi bi-check2"></i> Create Shop
                     </button>
                 </div>
