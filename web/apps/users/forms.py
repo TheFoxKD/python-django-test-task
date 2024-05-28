@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 
+from .exceptions import AuthenticationException
 from .repository import UserRepository
 from .services import UserService
 
@@ -45,10 +46,14 @@ class CustomAuthenticationForm(forms.Form):
         if username_or_email is None or password is None:
             raise forms.ValidationError('Empty username or password')
 
-        user: User = user_service.authenticate_user(username_or_email, password)
+        try:
+            user: User = user_service.authenticate_user(username_or_email, password)
+        except AuthenticationException as exception:
+            raise forms.ValidationError(exception.message)
+        else:
+            self.cleaned_data['user'] = user
 
-        self.cleaned_data['user'] = user
         return self.cleaned_data
 
-    def get_user(self):
+    def get_user(self) -> User:
         return self.cleaned_data.get('user')
